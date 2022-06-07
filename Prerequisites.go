@@ -45,3 +45,8 @@ package main
 
 // One of the differences between an authentication server and a resource server is the type of work
 //  they do (the authentication server handles only login and token requests, etc., and the resource server handles only content and information).
+
+// Bearer Tokens are the predominant type of access token used with OAuth 2.0.
+// A Bearer Token is a string, not intended to have any meaning to clients using it.
+// Some servers will issue tokens that are a short string of hexadecimal characters,
+//  while others may use structured tokens such as JSON Web Tokens
