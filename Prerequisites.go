@@ -1,6 +1,6 @@
 package main
 
-// what is the consumer key ?
+// what is the consumer key?
 
 // An API key (known as a consumer key) is a string value passed by a client app to your API proxies.
 // The key uniquely identifies the client app.
