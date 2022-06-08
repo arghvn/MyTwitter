@@ -13,10 +13,17 @@ import (
 	"os"
 )
 
+//Go offers built-in support for JSON encoding and decoding,
+//including to and from built-in and custom data types.
+
+//We’ll use these two structs to demonstrate encoding and decoding of custom types below.
+
 type response1 struct {
 	Page   int
 	Fruits []string
 }
+
+//Only exported fields will be encoded/decoded in JSON. Fields must start with capital letters to be exported.
 
 type response2 struct {
 	Page   int      `json:"page"`
@@ -37,6 +44,8 @@ func main() {
 	strB, _ := json.Marshal("gopher")
 	fmt.Println(string(strB))
 
+	//And here are some for slices and maps, which encode to JSON arrays and objects as you’d expect.
+
 	slcD := []string{"apple", "peach", "pear"}
 	slcB, _ := json.Marshal(slcD)
 	fmt.Println(string(slcB))
@@ -45,6 +54,8 @@ func main() {
 	mapB, _ := json.Marshal(mapD)
 	fmt.Println(string(mapB))
 
+	//The JSON package can automatically encode your custom data types.
+	// It will only include exported fields in the encoded output and will by default use those names as the JSON keys.
 	res1D := &response1{
 		Page:   1,
 		Fruits: []string{"apple", "peach", "pear"}}
@@ -57,17 +68,33 @@ func main() {
 	res2B, _ := json.Marshal(res2D)
 	fmt.Println(string(res2B))
 
+	//Now let’s look at decoding JSON data into Go values. Here’s an example for a generic data structure.
+
 	byt := []byte(`{"num":6.13,"strs":["a","b"]}`)
 
+	//We need to provide a variable where the JSON package can put the decoded data.
+	// This map[string]interface{} will hold a map of strings to arbitrary data types.
+
 	var dat map[string]interface{}
+
+	//Here’s the actual decoding, and a check for associated errors.
 
 	if err := json.Unmarshal(byt, &dat); err != nil {
 		panic(err)
 	}
 	fmt.Println(dat)
 
+	//In order to use the values in the decoded map, we’ll need to convert them to their
+	// appropriate type. For example here we convert the value in num to the expected float64 type.
+
 	num := dat["num"].(float64)
 	fmt.Println(num)
+
+	//Accessing nested data requires a series of conversions.
+
+	//We can also decode JSON into custom data types.
+	// This has the advantages of adding additional type-safety
+	// to our programs and eliminating the need for type assertions when accessing the decoded data.
 
 	strs := dat["strs"].([]interface{})
 	str1 := strs[0].(string)
@@ -83,3 +110,24 @@ func main() {
 	d := map[string]int{"apple": 5, "lettuce": 7}
 	enc.Encode(d)
 }
+
+//In the examples above we always used bytes and strings as intermediates
+// between the data and JSON representation on standard out. We can also stream
+//JSON encodings directly to os.Writers like os.Stdout or even HTTP response bodies.
+
+// output :
+
+// true
+// 1
+// 2.34
+// "gopher"
+// ["apple","peach","pear"]
+// {"apple":5,"lettuce":7}
+// {"Page":1,"Fruits":["apple","peach","pear"]}
+// {"page":1,"fruits":["apple","peach","pear"]}
+// map[num:6.13 strs:[a b]]
+// 6.13
+// a
+// {1 [apple peach]}
+// apple
+// {"apple":5,"lettuce":7}
