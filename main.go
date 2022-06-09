@@ -130,12 +130,28 @@ func main() {
 	}
 	fmt.Println(userResponse.Data.ID)
 
+	// in part of
+	// client.GetUserByUsername ("arshamalh")
+	// According to what the package says, we should also give those params as arguments,
+	// but since we do not need it now, we leave it blank and add nill.
+
 	db, _ := scribble.New("tweets", nil)
 	user_id := userResponse.Data.ID
 	tweetsResponse, _ := client.GetUserTweets(user_id, nil)
+	// Since we do not need an error in this section
+	// tweetsResponse, _
+	// We used _.
 	tweets := tweetsResponse.Data
 	for _, tweet := range tweets {
-		// Write a fish to the database
+
+		// "Tweets" is an array of tweets that must be indexed when using range to avoid errors.
+
+		// If we want to run the program somewhere and it has
+		//  an error and we do not notice the error, we use error handling.
+		// if err != nil {
+		// 	fmt.Println(err)
+		// }
+
 		if err := db.Write("tweet", tweet.ID, tweet); err != nil {
 			fmt.Println("Error", err)
 		}
@@ -148,3 +164,9 @@ func main() {
 	}
 	// client.GetUserByUsername("@elonmusk")
 }
+
+// We can create a file
+// .gitignore
+// Do something that github does not want the files in this file (folder) from us. Then the file
+// .env
+// We write the bearer token in this file and the second line.
