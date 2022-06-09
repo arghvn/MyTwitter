@@ -170,3 +170,10 @@ func main() {
 // Do something that github does not want the files in this file (folder) from us. Then the file
 // .env
 // We write the bearer token in this file and the second line.
+
+// @arshamalh
+// Is a username
+
+// Tiwitter id
+// 1254655 ………. Live in chat
+// With this code, you can receive personal tweets and save them with scribble.
