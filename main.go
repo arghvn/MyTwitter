@@ -1,14 +1,32 @@
 package main
 
-//Using the Twigo library and the scribble package,
-//we want to capture the identities of ID people on Twitter and save them on Scribble.
+// My first project while passing the learning stage
+// Contains important tips about starting a project
 
-//Twigo from github , written by user arshamalh
-//scribble is a Simple JSON Database in Golang
+// In the vscode terminal at the beginning of each project  Enter 'go mod init' command
+// This means that we do not need to use the import section manually and this is done automatically.
+// To enter project specifications, package names, etc.
+// For example
+// 'Go mod init MyTiwwter'
+// In this case vscode a file (Go mod) creates which we enter and code the project in this file.
 
-//To use Tiwgo, we need items such as consumer key, access token, bearer token, which we need to create.
+// The 'Go get' command is used to install the library in the terminal, libraries from the main GO site or from github.com
+// The use of the variable must always occur in the Main space(expected declaration error)
+// Anything other than the definition of a variable involves use, and only the definition of a variable can be done outside of this space (main).
+// Variables must always be defined before use.
+// The defined variable should always be used (it can be printed to avoid errors).
 
-// Twigo is a fast and easy to use twitter API library help you write best twitter bots.
+// The gosum file contains more information about downloading the packages used in the project.
+
+// Using the Twigo library and the scribble package,
+// we want to capture the identities of ID people on Twitter and save them Tweets on Scribble.
+
+// Twigo from github , written by user arshamalh
+// scribble is a Simple JSON Database in Golang
+
+// To use Tiwgo, we need items such as consumer key, access token, bearer token, which we need to create.
+
+// Twigo is a fast and easy to use twitter API library help we write best twitter bots.
 // Easily we can make a new client
 // As we said, we need to import this library
 
@@ -36,19 +54,19 @@ import (
 // bearer token must be through the package dotenv Load.
 
 type MyTweet struct {
-	Text string `json: "text"`
-	ID string `json: "id"`
+	Text      string `json: "text"`
+	ID        string `json: "id"`
 	CreatedAt string `json: "created_at"`
 }
 
 func main() {
 	godotenv.Load()
 	client, err := twigo.NewClient(&twigo.Config{
-		ConsumerKey:     "",
-		ConsumerSecret:  "",
-        AccessToken:     "",
-		AccessSecret:    "",
-		BearerToken:     os.Getenv("BEARER_TOKEN"),
+		ConsumerKey:    "",
+		ConsumerSecret: "",
+		AccessToken:    "",
+		AccessSecret:   "",
+		BearerToken:    os.Getenv("BEARER_TOKEN"),
 	})
 
 	if err != nil {
@@ -73,7 +91,7 @@ func main() {
 	}
 	records, _ := db.ReadAll("tweet")
 	for _, record := range records {
-		var tweet MyTweet 
+		var tweet MyTweet
 		json.Unmarshal([]byte(record), &tweet)
 		fmt.Println(tweet)
 	}
