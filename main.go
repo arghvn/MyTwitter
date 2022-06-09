@@ -40,49 +40,33 @@ import (
 	scribble "github.com/nanobox-io/golang-scribble"
 )
 
+// twigo.NewClient((&twigo.Config{
+// ConsumerKey:    "ConsumerKey",
+//   ConsumerSecret: "ConsumerSecret",
+//   AccessToken:    "AccessToken",
+//   AccessSecret:   "AccessTokenSecret",
+// 	BearerToken:    "BearerToken",
+//   }))
 
+// The above commented code will be used later in the main section.
 
-twigo.NewClient((&twigo.Config{
+// Both of "bearer token" or "four other keys (ConsumerKey, ...)" is not mandatory.
+// We'll find bearer token automatically if it's not specified.
+// Also, you can use twigo.utils.BearerFinder() function.
 
-	ConsumerKey:    "ConsumerKey",
-  
-	  ConsumerSecret: "ConsumerSecret",
-  
-	  AccessToken:    "AccessToken",
-  
-	  AccessSecret:   "AccessTokenSecret",
-  
-	// Both of "bearer token" or "four other keys (ConsumerKey, ...)" is not mandatory.
-	// We'll find bearer token automatically if it's not specified.
-	// Also, you can use twigo.utils.BearerFinder() function.
-  
-	  BearerToken:    "BearerToken",
-  
-  }))
-  
-  //For example, we want to receive a tweet like this.
-  
-  response, _ := client.GetTweet(tweet_id, nil)
-  
-  fmt.Printf("%#v\n", response)
-  
-  tweet := response.Data
-  
-  // Other features :  
-  // Making a tweet
-  // Retweeting and Liking a tweet
-  // deleting your like and retweet
-  // At this point, after receiving the tweets, we intend to save them in scribble.
-  // We need to create a client using the bearer token. This is done according to the instructions given.
-  // bearer token is for individuals and privately, so we do not use it in the code.
-  // bearer token must be through the package dotenv Load.
-  
+// For example, we want to receive a tweet like this.
+//   response, _ := client.GetTweet(tweet_id, nil)
+//   fmt.Printf("%#v\n", response)
+//   tweet := response.Data
 
-type MyTweet struct {
-	Text      string `json: "text"`
-	ID        string `json: "id"`
-	CreatedAt string `json: "created_at"`
-}
+// Other features :
+// Making a tweet
+// Retweeting and Liking a tweet
+// deleting your like and retweet
+// At this point, after receiving the tweets, we intend to save them in scribble.
+// We need to create a client using the bearer token. This is done according to the instructions given.
+// bearer token is for individuals and privately, so we do not use it in the code.
+// bearer token must be through the package dotenv Load.
 
 // Bearer token is a confidential code.
 // With this code, you can access users' accounts and write robots instead.
@@ -93,27 +77,18 @@ type MyTweet struct {
 // we must say that today tokens are used by users instead of using a normal password to log in to the system.
 // Some tokens are encrypted keys that store digital or biometric information such as fingerprints.
 
-
 // consumer key :
 //  An API key (known as a consumer key) is a string value passed by a client app to your API proxies.
 // The key uniquely identifies the client app.
 //  access token :
 // using token for User login base token authentication methods.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// In this section, we encountered an error that we fixed. Error text:
+// could not import github.com/joho/godotenv
+// This means that this library was not installed.
+// To solve the problem we went to the terminal and ordered
+// go get github.com/joho/godotenv
+// And this library was installed for us.
 
 func main() {
 	godotenv.Load()
