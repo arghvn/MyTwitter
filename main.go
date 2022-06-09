@@ -40,24 +40,80 @@ import (
 	scribble "github.com/nanobox-io/golang-scribble"
 )
 
-//For example, we want to receive a tweet like this.
 
-// Other features :
 
-// Making a tweet
-// Retweeting and Liking a tweet
-// deleting your like and retweet
+twigo.NewClient((&twigo.Config{
 
-// At this point, after receiving the tweets, we intend to save them in scribble.
-// We need to create a client using the bearer token. This is done according to the instructions given.
-// bearer token is for individuals and privately, so we do not use it in the code.
-// bearer token must be through the package dotenv Load.
+	ConsumerKey:    "ConsumerKey",
+  
+	  ConsumerSecret: "ConsumerSecret",
+  
+	  AccessToken:    "AccessToken",
+  
+	  AccessSecret:   "AccessTokenSecret",
+  
+	// Both of "bearer token" or "four other keys (ConsumerKey, ...)" is not mandatory.
+	// We'll find bearer token automatically if it's not specified.
+	// Also, you can use twigo.utils.BearerFinder() function.
+  
+	  BearerToken:    "BearerToken",
+  
+  }))
+  
+  //For example, we want to receive a tweet like this.
+  
+  response, _ := client.GetTweet(tweet_id, nil)
+  
+  fmt.Printf("%#v\n", response)
+  
+  tweet := response.Data
+  
+  // Other features :  
+  // Making a tweet
+  // Retweeting and Liking a tweet
+  // deleting your like and retweet
+  // At this point, after receiving the tweets, we intend to save them in scribble.
+  // We need to create a client using the bearer token. This is done according to the instructions given.
+  // bearer token is for individuals and privately, so we do not use it in the code.
+  // bearer token must be through the package dotenv Load.
+  
 
 type MyTweet struct {
 	Text      string `json: "text"`
 	ID        string `json: "id"`
 	CreatedAt string `json: "created_at"`
 }
+
+// Bearer token is a confidential code.
+// With this code, you can access users' accounts and write robots instead.
+
+// what is the Token in programming ?
+//   A token used to log users into computer services .Security tokens are used to prove the identity of each person.
+//  In terms of computer security, a "token" is a type of encrypted data in which a string of generated
+// we must say that today tokens are used by users instead of using a normal password to log in to the system.
+// Some tokens are encrypted keys that store digital or biometric information such as fingerprints.
+
+
+// consumer key :
+//  An API key (known as a consumer key) is a string value passed by a client app to your API proxies.
+// The key uniquely identifies the client app.
+//  access token :
+// using token for User login base token authentication methods.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 func main() {
 	godotenv.Load()
