@@ -92,7 +92,12 @@ import (
 
 func main() {
 	godotenv.Load()
+	// tweet_ID is used to get the user ID, which is a variable and needs to be defined.
+	// for examlpe :
+	// tweet_ID := "1598986"
 	client, err := twigo.NewClient(&twigo.Config{
+		// bearer token is only used to read tweets and for example we can not do activities such as liking with it.
+		// We leave the following four items that we do not need empty.
 		ConsumerKey:    "",
 		ConsumerSecret: "",
 		AccessToken:    "",
@@ -100,9 +105,24 @@ func main() {
 		BearerToken:    os.Getenv("BEARER_TOKEN"),
 	})
 
+	// The reason for writing the if statement in the bottom line is that in the field
+	// client, err: = twigo.NewClient (& twigo.Config
+	// err had an error, and typing this command, which says print if an error occurs, fixes the error.
+
 	if err != nil {
 		fmt.Println(err)
 	}
+
+	// Create the .env file to save bearer token.
+	// The string in this file is our token.
+
+	// .Env files store environmental variables.
+	// an environment variable is a variable whose value is set outside the program.
+	// And stores a series of information in our operating system (where it has high security)
+	// We store sensitive information such as tokens in these files and never place them in open source locations such as github.
+	// The godotenv.Load () command takes the .env file information and sends it to the operating system (secure location)
+	// In this case, after loading this information with the said command, we must call this information using the os package,
+	//  which is the operating system package.
 
 	userResponse, err := client.GetUserByUsername("arshamalh", nil)
 	if err != nil {
