@@ -1,4 +1,7 @@
-package main
+The Telegram robot connects to the Telegram api and communicates with other applications in any language that can create http requests.
+Telegram API is a set of links that we can send data to whenever we call a link.
+For example, the ID of the person who receives the message and the text of the message for which we want to send, etc. In response, answers are returned. Each of these links is considered a route. Libraries for each of these routes specific codes has it.
+route means direction
 
 For subsequent robotics projects, the readme file is used to provide explanations. 
 

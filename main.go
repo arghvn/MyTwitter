@@ -40,6 +40,9 @@ import (
 	scribble "github.com/nanobox-io/golang-scribble"
 )
 
+// The words that are automatically written before the import packages are called alias,
+// which is a substitute for the original name used.
+
 // twigo.NewClient((&twigo.Config{
 // ConsumerKey:    "ConsumerKey",
 //   ConsumerSecret: "ConsumerSecret",
@@ -177,3 +180,11 @@ func main() {
 // Tiwitter id
 // 1254655 ………. Live in chat
 // With this code, you can receive personal tweets and save them with scribble.
+
+// note :
+// in this line
+// var e = 'f'
+// The value that returns is a number because the letter and' 'is used to return asci values.
+
+// function calls should be inside of the functions.
+// Structures are defined above the mine and the functions below it
